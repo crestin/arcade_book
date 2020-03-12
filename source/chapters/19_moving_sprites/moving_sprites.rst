@@ -81,13 +81,13 @@ keep going into negative-coordinate land. We can't see them any more. Sad.
 
     Coins moving down
 
-Resetting to the Top
+Resetting to the Top 再次回到顶端
 ^^^^^^^^^^^^^^^^^^^^
 
 We can get around this by resetting the coins up to the top. Here's how its
 done:
 
-
+我们可以通过重置将其返回到顶端。这样做：
 
 .. code-block:: Python
 
@@ -105,8 +105,12 @@ But this isn't perfect. Because if your eyes are fast, you can see the coin
 because we move it when the *center* of the coin is at the edge. Not the top of
 the coin has slid off.
 
+但这并不完美。如果你眼快，你可以看到硬币在边缘附近被弹出。不够顺滑。这是因为当硬币的中心在边缘时我们会移动它，而不是在硬币的顶部掉下来时。
+
 There are a couple ways we can do this. Here's one. We'll check at -20 instead
 of 0. As long as the coin radius is 20 or less, we are good.
+
+我们有多个方法可以解决，这是其中一个。我们将判定的时机用 -20 代替 0，只要是半径为 20 或更小的硬币，看起来效果都不错。
 
 .. code-block:: Python
 
@@ -123,6 +127,8 @@ There's another way. In addition to ``center_y``, sprites have other
 members that are useful in these cases. They are ``top``, ``bottom``,
 ``left`` and ``right``. So we can do this:
 
+另一种做法是，除了判断 “中心” 在 y轴 的位置外，精灵还有其他在这些情况下有用的成员。它们是``top``、``bottom``、``left``和``right``。所以我们可以这样做：
+
 .. code-block:: Python
 
     class Coin(arcade.Sprite):
@@ -137,11 +143,15 @@ members that are useful in these cases. They are ``top``, ``bottom``,
 Doing this allows the coins to smoothly slide on and off the screen. But since
 they reappear at the top, we get repeating patters. See the image below:
 
+这样做可以让硬币在屏幕上平滑的移动。但是从它们再次出现在顶部，我们就会看到重复的部分。见下图：
+
 .. figure:: pattern.gif
 
     Coins repeating in a pattern
 
 Instead we can randomize it a bit:
+
+当然，我们可以使它变得随机一些：
 
 .. code-block:: Python
 
@@ -158,12 +168,14 @@ Instead we can randomize it a bit:
                                              SCREEN_HEIGHT + 100)
             self.center_x = random.randrange(SCREEN_WIDTH)
 
-Never Ending Coins
+Never Ending Coins 永无止尽的硬币
 ^^^^^^^^^^^^^^^^^^
 
 This works, but when we we collect all the coins we are done. What if it was
 a never-ending set of coins? Instead of "killing" the coin, let's reset it to
 the top of the screen.
+
+这是可行的，但现在当我们收尽所有硬币时，我们就结束了。如果这是一组永无止境的硬币呢？与其“杀死”硬币，不如把它重新设置到屏幕顶部。
 
 .. code-block:: Python
 
@@ -183,6 +195,8 @@ the top of the screen.
             coin.center_x = random.randrange(SCREEN_WIDTH)
 
 We can even take that common code, and move it to a method. Here's a full example:
+
+我们甚至可以将那个公共代码放在一个方法中。以下是一个完整的例子：
 
 .. literalinclude:: sprite_sample_move_down_full.py
     :caption: Full Move Down Sprite Sample
