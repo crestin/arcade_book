@@ -53,6 +53,8 @@ To get the sprites to "fall" down the screen, we need to make their y location
 smaller. This is easy. Over-ride ``update`` in the sprite and subtract from
 y each frame:
 
+想要在屏幕上达到精灵“坠落”的效果，我们只需要使它们 y轴 方向的数值逐渐减小即可。这很容易实现，重写精灵的 ``update``方法，使在每一帧上都减少一点：
+
 .. code-block:: Python
 
     class Coin(arcade.Sprite):
@@ -61,6 +63,8 @@ y each frame:
             self.center_y -= 1
 
 Next, create an instance of the ``Coin`` class instead of a ``Sprite`` class.
+
+接下来，创建一个类 ``Coin`` 的实例，而不是类 ``Sprite`` 的。
 
 .. literalinclude:: sprite_sample_move_down.py
     :caption: Sprite Sample Move Down
@@ -71,6 +75,8 @@ Next, create an instance of the ``Coin`` class instead of a ``Sprite`` class.
 This causes the coins to move down. But once they move off the screen they
 keep going into negative-coordinate land. We can't see them any more. Sad.
 
+硬币向下移动。但是，一旦它们离开屏幕，就会继续进入负坐标区域。令人沮丧的是我们再也看不到他们了。
+
 .. figure:: coins_down_1.gif
 
     Coins moving down
@@ -80,6 +86,8 @@ Resetting to the Top
 
 We can get around this by resetting the coins up to the top. Here's how its
 done:
+
+
 
 .. code-block:: Python
 
