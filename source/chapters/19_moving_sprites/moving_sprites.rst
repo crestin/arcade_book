@@ -204,12 +204,12 @@ We can even take that common code, and move it to a method. Here's a full exampl
     :linenos:
     :emphasize-lines: 15-36
 
-Bouncing Coins
+Bouncing Coins 弹跳的硬币
 --------------
 
-Instead of always adding one to the y-coordinate and have the sprites move
-down, we can keep a vector by using ``change_x`` and ``change_y``. By
-using these, we can have the sprite bounce around the screen:
+Instead of always adding one to the y-coordinate and have the sprites move down, we can keep a vector by using ``change_x`` and ``change_y``. By using these, we can have the sprite bounce around the screen:
+
+我们可以使用 ``change_x`` 和 ``change_y`` 向量，而不是总是在 y坐标 让精灵向下移动。通过使用这些，我们可以让精灵在屏幕上弹跳：
 
 .. figure:: sprites_bouncing.gif
 
@@ -221,18 +221,19 @@ using these, we can have the sprite bounce around the screen:
     :emphasize-lines: 21-22, 24-41, 92-93
     :linenos:
 
-TODO: Put in some text about spawning a sprite too close to the edge. Also make a refer to it from the final
-project.
+TODO: Put in some text about spawning a sprite too close to the edge. Also make a refer to it from the final project.
 
+TODO: 输入一些关于生成离边缘太近的精灵的文本。
 
-Take what you've learned from the example above, and see if you can replicate
-this:
+Take what you've learned from the example above, and see if you can replicate this:
+
+使用之前学到的，尝试做出以下效果：
 
 .. figure:: Test_Pattern.gif
 
     Test Pattern
 
-Coins Moving In Circles
+Coins Moving In Circles 自带弧线移动的硬币
 -----------------------
 
 .. figure:: sprites_circle.gif
@@ -244,18 +245,20 @@ Coins Moving In Circles
     :language: python
     :linenos:
 
-Rotating Sprites
+Rotating Sprites 旋转的精灵
 ----------------
 
-Sprites can easily be rotated by setting their ``angle`` attribute. Angles are
-in degrees. So the following will flip the player upside down:
+Sprites can easily be rotated by setting their ``angle`` attribute. Angles are in degrees. So the following will flip the player upside down:
+
+通过设置 ``angle`` 属性可以使精灵很容易的实现转动。
 
 .. code-block:: Python
 
     self.player_sprite.angle = 180
 
-If you put this in the coin's ``update`` method, it would cause the coins to
-spin:
+If you put this in the coin's ``update`` method, it would cause the coins to spin:
+
+如果你把这个放到硬币的 ``update`` 方法中，硬币就转动起来了：
 
 .. code-block:: Python
 
