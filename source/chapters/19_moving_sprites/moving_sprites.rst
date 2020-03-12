@@ -1,20 +1,16 @@
 
-Moving Sprites
+Moving Sprites 移动精力
 ==============
 
-How do we get sprites to move?
-
-To customize our sprite's behavior, we need to subclass the ``Sprite`` class
-with our own child class. This is easy:
-
+How do we get sprites to move?怎样才能使精灵动起来？
+To customize our sprite's behavior, we need to subclass the ``Sprite`` class with our own child class. This is easy:
+想要定义精灵的行为，我们只需要创建 Sprite 的子类，这很容易做到：
 .. code-block:: Python
 
     class Coin(arcade.Sprite):
 
-We need to provide each sprite with a
-``update`` method. The ``update`` method is automatically called to update
-the sprite's position.
-
+We need to provide each sprite with a ``update`` method. The ``update`` method is automatically called to update the sprite's position.
+我们需要为精灵提供一个 update 方法，update 方法会自动被调用，更新精灵的位置。
 .. code-block:: Python
 
     class Coin(arcade.Sprite):
