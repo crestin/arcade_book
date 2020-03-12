@@ -2,17 +2,21 @@
 Moving Sprites 移动精力
 ==============
 
-How do we get sprites to move?怎样才能使精灵动起来？
+How do we get sprites to move?
+
+怎样才能使精灵动起来？
 
 To customize our sprite's behavior, we need to subclass the ``Sprite`` class with our own child class. This is easy:
-想要定义精灵的行为，我们只需要创建 Sprite 的子类，这很容易做到：
+
+想要定义精灵的行为，我们只需要创建 ``Sprite`` 的子类，这很容易做到：
 
 .. code-block:: Python
 
     class Coin(arcade.Sprite):
 
 We need to provide each sprite with a ``update`` method. The ``update`` method is automatically called to update the sprite's position.
-我们需要为精灵提供一个 update 方法，update 方法会自动被调用，更新精灵的位置。
+
+我们需要为精灵提供一个 ``update`` 方法，``update`` 方法会自动被调用，更新精灵的位置。
 
 .. code-block:: Python
 
@@ -23,14 +27,16 @@ We need to provide each sprite with a ``update`` method. The ``update`` method i
 
 Wait! We have a new class called Coin, but we aren't using it. Find in our
 original code this line:
+
 我们有个一名为 Coin 的新类，但我们没有使用。找到我们的原代码行：
 
 .. code-block:: Python
 
     coin = arcade.Sprite("coin_01.png", COIN_SPRITE_SCALING)
 
-See how it is creating an instance of ``Sprite``? We want to create an instance
-of our new ``Coin`` class instead:
+See how it is creating an instance of ``Sprite``? We want to create an instance of our new ``Coin`` class instead:
+
+看看它是如何创建 ``Sprite`` 实例的？我们想创建一个新 ``Coin`` 类的实例：
 
 .. code-block:: Python
 
@@ -38,7 +44,12 @@ of our new ``Coin`` class instead:
 
 Now, how do we get the coin to move?
 
+现在，如何移动 coin 呢？
+
 Moving Sprites Down
+
+向下移动精灵
+
 -------------------
 
 To get the sprites to "fall" down the screen, we need to make their y location
