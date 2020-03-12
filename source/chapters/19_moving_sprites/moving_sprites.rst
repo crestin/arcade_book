@@ -46,10 +46,7 @@ Now, how do we get the coin to move?
 
 现在，如何移动 coin 呢？
 
-Moving Sprites Down
-
-向下移动精灵
-
+Moving Sprites Down 向下移动精灵
 -------------------
 
 To get the sprites to "fall" down the screen, we need to make their y location
