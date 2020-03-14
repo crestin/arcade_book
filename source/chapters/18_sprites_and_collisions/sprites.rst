@@ -134,7 +134,7 @@ What's next? We need to add our attributes to the ``MyGame`` class.
 We add our attributes to the ``__init__`` method. Here is our
 code with the expanded ``__init__``:
 
-
+接着我们添加一些属性到 ``MyGame`` 类的 ``__init__`` 方法中：
 
 .. literalinclude:: sprite_sample_expanded_init.py
     :caption: Expanded Init
@@ -143,6 +143,8 @@ code with the expanded ``__init__``:
     :linenos:
 
 The variables we are creating:
+
+创建的变量有：
 
 * ``player_list``:  When working with sprites, we normally put them into
   lists. Other game engines might call these sprite groups, or sprite layers.
@@ -159,17 +161,20 @@ We use a command built into the parent ``Window`` class called
 ``set_mouse_visible`` to make the mouse not visible. Finally we set the
 background color.
 
-The `setup` Function
+我们调用了父类 ``Window`` 中 ``set_mouse_visible`` 方法，传递参数为 False 以设置鼠标不可见。最后还设置了背景色。
+
+The `setup` Function  `setup` 方法
 ^^^^^^^^^^^^^^^^^^^^
 
 Next up, we will create a ``setup`` method. This will create our sprites and get
 our game set up. We do this in a different method than ``__init__`` so that
 if we ever want to restart the game, we can just call ``setup`` again.
 
-The ``setup`` method is not called automatically.
-Therefore in the example below, note we have added the
-code that calls the ``setup`` function near the end: ``window.setup()``.
+我们会在 ``setup`` 方法中设置游戏并创建精灵。在 ``__init__`` 以外这样做，是为了可以在游戏的时候，如果重新开始只需要调用 ``setup`` 即可。
 
+The ``setup`` method is not called automatically.Therefore in the example below, note we have added thecode that calls the ``setup`` function near the end: ``window.setup()``.
+
+``setup`` 方法不会被自动调用。所以我们在下边的代码末尾处使用 ``window.setup()`` 调用。
 
 .. literalinclude:: sprite_sample_player.py
     :caption: Sprite Sample With Player
@@ -180,8 +185,12 @@ code that calls the ``setup`` function near the end: ``window.setup()``.
 
 How does the code above work?
 
+以上代码是如何运行的？
+
 First, we need some lists to hold our sprites. We could do use a list like
 this:
+
+首先，我们需要一个列表放置我们的精灵：
 
 .. code-block:: Python
 
@@ -189,6 +198,8 @@ this:
 
 But wait! ``coin_list`` is an instance variable that's part of our class.
 we need to prepend it with ``self.``.
+
+``coin_list`` 是一个实例变量，所以我们需要加上 ``self.``。
 
 .. code-block:: Python
 
@@ -200,6 +211,8 @@ For more information, check out the SpriteList_ documentation.
 So instead of creating an empty list with
 ``[]``, we will create a new instance of the ``SpriteList`` class:
 
+但是，Arcade库有一个类，专门用于处理sprite列表。这个类称为SpriteList。有关更多信息，请查看SpriteList文档。因此，我们将创建SpriteList类的新实例，而不是使用[]创建空列表：
+
 .. _SpriteList: http://arcade.academy/arcade.html#arcade.sprite.SpriteList
 
 .. code-block:: Python
@@ -210,12 +223,16 @@ Except that doesn't work. Why? ``SpriteList`` is in the Arcade library. We
 need to prepend any reference to things in the Arcade library with ``arcade``
 of course, so now we have:
 
+直接使用 SpriteList() 会出错，因为它是定义在 Arcade库 中的。所以我们需要加上引用才可以：
+
 .. code-block:: Python
 
     self.coin_list = arcade.SpriteList()
 
 We need a separate list for just coins. This list won't have the player. We also
 need to reset our score to 0.
+
+除了一个空的金币列表，我们还需要将得分初始化为 0。
 
 .. code-block:: Python
 
@@ -229,7 +246,11 @@ documentation.
 The Sprite constructor takes two parameters. A path to the image we will be
 using, and how big to scale it.
 
+现在我们使用 ``Sprite`` 类来创建精灵，相关信息可以查看文档。Sprite 构造函数需要两个参数。一个是图片路径，一个是缩放值。
+
 For class, please source the image right before you load it. If you drew your own image, please note that as well.
+
+在加载之前，请确保图像资源没有问题。
 
 .. _Sprite: http://arcade.academy/arcade.html#arcade.sprite.Sprite
 
@@ -244,6 +265,8 @@ How do we draw all our sprites? Really easy. Just call the ``draw`` method that
 exists for us in the ``SpriteList`` class. We just need to do this for each of
 our sprite lists.
 
+如何显示全部的精灵？这确实很容易就能做到，只需要调用精灵列表 ``SpriteList`` 的 ``draw`` 方法。就像下边这样：
+
 .. code-block:: Python
 
     def on_draw(self):
@@ -257,17 +280,21 @@ our sprite lists.
 Wait. We don't have many sprites. There are no coins, and we have just the player.
 Let's add a ``for`` loop to our program and create a bunch of coins:
 
+除了玩家精灵外，我们还没有其它精灵。需要使用 ``for`` 循环创建一批金币出来。
+
 .. literalinclude:: sprite_sample_coins.py
     :caption: Sprite Sample With Player And Coins
     :language: python
     :emphasize-lines: 54-65
     :linenos:
 
-Drawing The Score
+Drawing The Score 显示成绩
 ^^^^^^^^^^^^^^^^^
 
 In addition to drawing the sprites, let's go ahead and
 put the score on the screen:
+
+除了绘制精灵，我们还要讲成绩显示在屏幕的顶部：
 
 .. code-block:: Python
 
@@ -279,6 +306,8 @@ Rather than do that ``"Score: " + str(self.score)`` it is possible to do
 print formatting if you are using Python 3.6 or later. We'll talk more about
 print formatting later, but that code would look like:
 
+在 Python 3.6 之后的版本中，可以更好地格式化字符串，之后我们会详细讨论，就像下边这样使用：
+
 .. code-block:: Python
 
     # Put the text on the screen.
@@ -288,12 +317,16 @@ print formatting later, but that code would look like:
 There are three standards for how to format strings in Python, so that whole
 subject is a bit confusing.
 
-The On Mouse Motion Method
+有三种标准的方法用来格式化字符串，这往往容易让人感到迷惑。
+
+The On Mouse Motion Method 鼠标动作方法
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Moving the player sprite with the mouse is easy. All sprites have instance
 variables ``center_x`` and ``center_y``. Just change those values to the mouse's
 x and y location to move the sprite.
+
+使用鼠标移动玩家控制的精灵很容一就能做到。所有的精灵都会有实例化参数  ``center_x`` 和 ``center_y``，只需要提供鼠标的 x 和 y 坐标给精灵即可。
 
 .. code-block:: Python
 
@@ -305,20 +338,24 @@ x and y location to move the sprite.
 
 Now, our whole program looks like:
 
+现在，我们的程序看起来像下边这样：
+
 .. literalinclude:: sprite_sample_with_mouse_motion.py
     :caption: Sprite Sample With Mouse Motion And Score
     :language: python
     :emphasize-lines: 73-75, 77-82
     :linenos:
 
-The Update Method
+The Update Method 更新（Update）方法
 ^^^^^^^^^^^^^^^^^
 
 Our ``update`` method needs to do three things:
 
-1. Update each of the sprites
-2. Check to see if the player is touching any coins
-3. Remove any coins colliding with the player, and update the score.
+我们的 ``update`` 方法需要完成三件事：
+
+1. Update each of the sprites 更新每一个精灵的状态
+2. Check to see if the player is touching any coins 侦测玩家精灵与其它精灵是否发生碰撞
+3. Remove any coins colliding with the player, and update the score. 移除发生碰撞的金币，然后更新成绩
 
 Each sprite has its own ``update`` method. This allows sprites to move and
 animate its images. Right now, our sprite does not have this method. But we
@@ -326,6 +363,8 @@ will soon. Rather than call the ``update`` method of each sprite we have,
 there is an ``update`` method in each sprite list that will call ``update``
 on each sprite in the list. Therefore, just calling ``update`` with our
 ``coin_list`` will cause all coin sprites to update.
+
+每个精灵都有自己的 ``update`` 方法。这会使精灵产生移动或是动画效果。我们没有调用每个精灵的 ``update`` 方法，而是在每个精灵列表中都有一个 ``update`` 方法，它将调用列表中每个精灵的 update。因此，只要用我们的硬币列表调用 update，就会导致所有硬币精灵更新。
 
 .. code-block:: Python
 
@@ -336,6 +375,8 @@ How do we detect what coins are touching the player? We call the
 along with a list of all the coins. That function will return a list of
 all colliding sprites. If no sprites collide, the list will be empty.
 
+我们如何检测玩家收集了多少硬币？我们调用 ``check_for_collision_with_list`` 方法，把玩家和所有的硬币精灵传给它。该函数将返回所有碰撞精灵的列表。如果没有精灵碰撞，列表将为空。
+
 .. code-block:: Python
 
     # Generate a list of all sprites that collided with the player.
@@ -344,8 +385,12 @@ all colliding sprites. If no sprites collide, the list will be empty.
 What do we do with this ``hit_list`` we get back? We loop through it. We add one
 to the score for each sprite hit.
 
+我们可以便利返回的 ``hit_list`` 列表，然后没个收集到（发生碰撞）的金币就加 1 分。
+
 We also need to get rid of the sprite. The sprite class has a method called
 ``kill``. This method will remove the sprite from existence.
+
+我们还需要清除掉精灵。sprite 类有一个名为 kill 的方法。此方法将从现有的精灵列表中移除该精灵。
 
 .. code-block:: Python
 
@@ -355,6 +400,8 @@ We also need to get rid of the sprite. The sprite class has a method called
         self.score += 1
 
 Here's the whole ``update`` method put together:
+
+现在将 ``update`` 方法一起加入进去：
 
 .. literalinclude:: sprite_sample_with_update.py
     :caption: Sprite Sample With Update Method
